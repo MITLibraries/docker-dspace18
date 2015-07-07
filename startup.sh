@@ -1,7 +1,9 @@
 #!/bin/bash
 set -e
 
-sed -i "s,^db.url.*,db.url = jdbc:postgresql://${PG_PORT_5432_TCP_ADDR}:${PG_PORT_5432_TCP_PORT}/dspace", \
+sed -i "s,^db.url.*,db.url = jdbc:postgresql://${PG_PORT_5432_TCP_ADDR}:${PG_PORT_5432_TCP_PORT}/dspace," \
+    ${BUILD_DIR}/config/dspace.cfg
+sed -i "s,^dspace.baseUrl.*,dspace.baseUrl = http://localhost:${HOST_PORT:-8080}," \
     ${BUILD_DIR}/config/dspace.cfg
 cd ${BUILD_DIR} && ant update_configs
 

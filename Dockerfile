@@ -1,27 +1,14 @@
-FROM debian:wheezy
+FROM tomcat:7
 MAINTAINER Mike Graves <mgraves@mit.edu>
 
 RUN apt-get update && apt-get install -y \
     curl \
     postgresql-client \
-    openjdk-6-jre \
     maven \
     ant
 
 ADD startup.sh /usr/local/bin/startup.sh
 RUN chmod +x /usr/local/bin/startup.sh
-
-
-# Install Tomcat 7
-ENV TOMCAT_VERSION 7.0.62
-ENV CATALINA_HOME /usr/local/tomcat
-ENV PATH $CATALINA_HOME/bin:$PATH
-
-RUN mkdir -p ${CATALINA_HOME}
-RUN cd ${CATALINA_HOME} && \
-    curl -L https://www.apache.org/dist/tomcat/tomcat-7/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz | \
-    tar xz --strip-components=1
-
 
 # Install DSpace
 ENV DSPACE_VERSION 1.8.3
