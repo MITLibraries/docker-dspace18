@@ -14,7 +14,7 @@ if [ "$1" = 'initialize' ]; then
     psql ${PG_ARGS[@]} -c "CREATE DATABASE dspace;"
     psql ${PG_ARGS[@]} -c "GRANT ALL PRIVILEGES ON DATABASE dspace TO dspace;"
 
-    cd ${BUILD_DIR} && ant test_database && ant setup_database
+    cd ${BUILD_DIR} && ant test_database && ant setup_database && ant load_registries
     ${INSTALL_DIR}/bin/dspace create-administrator -e ${ADMIN_EMAIL} \
         -f ${ADMIN_FIRST_NAME} -l ${ADMIN_LAST_NAME} -p ${ADMIN_PASSWORD} \
         -c ${ADMIN_LANG:-en}
