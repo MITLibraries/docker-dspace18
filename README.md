@@ -15,9 +15,9 @@ The previous step will leave you with a DSpace instance running on container por
 
     $ docker run -P --link db:pg -d mitlibraries/dspace
 
-Using SWORD
------------
+DSpace Hostname
+---------------
 
-If you need to use the SWORD service you will have to explicitly map a host port ( `-p <host port>:8080` ) to container port 8080 and pass this to the container as an environment variable ( `-e HOST_PORT=<host port>` ). For example:
+Depending on how you have things set up, you may need to pass the base URL for your DSpace instance to the container when starting it up. By default, this is set to `http://localhost:8080`. If you will be accessing DSpace at a different location--a different port, for example--you should pass this as an environment variable ( `BASE_URL` ) when running the container. For example:
 
-    $ docker run -p 8888:8080 -e HOST_PORT=8888 --link db:pg -d mitlibraries/dspace
+    $ docker run -p 8888:8080 -e BASE_URL=http://localhost:8888 --link db:pg -d mitlibraries/dspace
